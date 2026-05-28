@@ -8,12 +8,12 @@ flowchart LR
     M1((marcar_a))
     R1((retornar))
     F1((final))
-    A1 -->|a→X R| M1
-    M1 -->|X→X R| M1
-    M1 -->|b→Y L| R1
-    R1 -->|Y→Y L| R1
-    R1 -->|blank→blank R| A1
-    A1 -->|blank→blank R| F1
+    A1 -->|a to X R| M1
+    M1 -->|X to X R| M1
+    M1 -->|b to Y L| R1
+    R1 -->|Y to Y L| R1
+    R1 -->|blank to blank R| A1
+    A1 -->|blank to blank R| F1
   end
 
   %% Máquina 2: a^n b^n c^n (verde)
@@ -25,15 +25,15 @@ flowchart LR
     C2((marcar_c))
     R2((retornar_inicio))
     F2((final))
-    A2 -->|a→X R| M2
-    M2 -->|X→X R| M2
-    M2 -->|b→Y R| B2
-    B2 -->|Y→Y R| B2
-    B2 -->|c→Z L| C2
-    C2 -->|Z→Z L| C2
-    C2 -->|blank→blank R| R2
-    R2 -->|pular_marcados R| A2
-    A2 -->|blank→blank R| F2
+    A2 -->|a to X R| M2
+    M2 -->|X to X R| M2
+    M2 -->|b to Y R| B2
+    B2 -->|Y to Y R| B2
+    B2 -->|c to Z L| C2
+    C2 -->|Z to Z L| C2
+    C2 -->|blank to blank R| R2
+    R2 -->|skip marked and move R| A2
+    A2 -->|blank to blank R| F2
   end
 
   %% Máquina 3: a* b* (laranja)
@@ -43,12 +43,12 @@ flowchart LR
     Q3((q0))
     Q3b((q1))
     F3((final))
-    A3 -->|eps→eps R| Q3
-    Q3 -->|a→a R| Q3
-    Q3 -->|b→b R| Q3b
-    Q3b -->|b→b R| Q3b
-    Q3 -->|blank→blank R| F3
-    Q3b -->|blank→blank R| F3
+    A3 -->|start| Q3
+    Q3 -->|a to a R| Q3
+    Q3 -->|b to b R| Q3b
+    Q3b -->|b to b R| Q3b
+    Q3 -->|blank to blank R| F3
+    Q3b -->|blank to blank R| F3
   end
 
   %% Legenda
@@ -56,5 +56,5 @@ flowchart LR
     direction TB
     L1["X = a marcado  •  Y = b marcado  •  Z = c marcado"]
     L2["blank = símbolo branco (ba ou _)"]
-    L3["R = direita  •  L = esquerda  •  eps = fita vazia"]
+    L3["R = direita  •  L = esquerda  •  formato: lido to escrito movimento"]
   end

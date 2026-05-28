@@ -22,13 +22,14 @@ Objetivo: facilitar criação, depuração e execução de máquinas (ex.: `a^n 
 **Comando básico**
 ```bash
 ruby src_refactor/main.rb machines_refactor/<maquina>.mt inputs_refactor/<entrada>.in
-
+```bash
 Exemplos
 
+```bash
 ruby src_refactor/main.rb machines_refactor/cf_an_bn.mt inputs_refactor/cf_tests.in
 ruby src_refactor/main.rb machines_refactor/cs_an_bn_cn.mt inputs_refactor/cs_tests.in
 ruby src_refactor/main.rb machines_refactor/regular_a_star_b_star.mt inputs_refactor/regular_tests.in
-
+```bash
 Ativar debug
 Para ver o passo a passo, edite src_refactor/maquina_turing_universal.rb e defina:
 

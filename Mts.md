@@ -1,3 +1,5 @@
+```mermaid
+
 flowchart LR
   %% Máquina 1: a^n b^n (azul)
   subgraph ANBN["Máquina para a^n b^n"]

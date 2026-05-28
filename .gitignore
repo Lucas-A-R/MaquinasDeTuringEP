@@ -1,0 +1,30 @@
+# System
+.DS_Store
+Thumbs.db
+
+# Editor
+/.vscode/
+/.idea/
+*.swp
+
+# Logs and temp
+*.log
+*.tmp
+/tmp/
+*.pid
+
+# Ruby
+/.bundle/
+/vendor/bundle
+*.gem
+*.rbc
+.bundle
+
+# Node (if any)
+node_modules/
+
+# Tests output
+tests/results.csv
+
+# OS
+*.DS_Store

@@ -20,7 +20,7 @@ Objetivo: facilitar criação, depuração e execução de máquinas (ex.: `a^n 
 
 ## Como executar
 **Comando básico**
-bash
+```bash
 ruby src_refactor/main.rb machines_refactor/<maquina>.mt inputs_refactor/<entrada>.in
 
 Exemplos

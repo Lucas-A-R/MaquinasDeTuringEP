@@ -22,3 +22,5 @@ Objetivo: facilitar criação, depuração e execução de máquinas (ex.: `a^n 
 **Comando básico**
 ```bash
 ruby src_refactor/main.rb machines_refactor/<maquina>.mt inputs_refactor/<entrada>.in
+
+```bash

@@ -1,7 +1,8 @@
-# MAQUINA DE TURING
+# MÁQUINAS DE TURING
 
 Repositório com um simulador de Máquinas de Turing em Ruby, definições de máquinas (`.mt`) e entradas de teste (`.in`).  
-Objetivo: facilitar criação, depuração e execução de máquinas (ex.: `a^n b^n`, `a^n b^n c^n`, `a* b*`).
+## Objetivo: 
+facilitar criação, depuração e execução de máquinas (ex.: `a^n b^n`, `a^n b^n c^n`, `a* b*`).
 
 ---
 
@@ -9,12 +10,12 @@ Objetivo: facilitar criação, depuração e execução de máquinas (ex.: `a^n 
 - **machines_refactor/** — definições das máquinas em `.mt`  
 - **inputs_refactor/** — entradas de teste `.in` e subpastas para casos inválidos  
 - **src_refactor/** — código refatorado do simulador (loader e `main.rb`)  
-- **src_original/** — código original preservado
+- **src_original/** — código original preservado (usado como base para fazer as mts)
 
 ---
 
 ## Pré‑requisitos
-- Ruby instalado (versão compatível com seu ambiente).
+- Ruby instalado.
 
 ---
 
@@ -32,19 +33,20 @@ ruby src_refactor/main.rb machines_refactor/cs_an_bn_cn.mt inputs_refactor/cs_te
 ruby src_refactor/main.rb machines_refactor/regular_a_star_b_star.mt inputs_refactor/regular_tests.in
 
 ```
+Cada mt contem um arquivo de testes adequado para as entradas serem validadas ou não
 ## Ativar debug
 Para ver o passo a passo, edite src_refactor/maquina_turing_universal.rb e defina:
 
 ```ruby
 
-DEBUG = true
+DEBUG = true //localiza se na linha 24
 
 ```
 Depois de depurar, volte para:
 
 ```ruby
 
-DEBUG = false
+DEBUG = false //localiza se na linha 24
 
 ```
 antes de commitar.
@@ -104,104 +106,6 @@ printf "a;a;a;b;b;b;ba" > inputs_refactor/regular_tests.in
 
 ```
 
-### Rodar uma bateria simples (bash)
-
-```bash
-
-for m in machines_refactor/*.mt; do
-  echo "Máquina: $m"
-  for i in inputs_refactor/*.in; do
-    echo "  Testando $i"
-    ruby src_refactor/main.rb "$m" "$i"
-  done
-  echo "----"
-done
 
 
-```
-
-### Rodar uma bateria simples (PowerShell)
-
-```powershell
-
-$machines = Get-ChildItem machines_refactor\*.mt
-foreach ($m in $machines) {
-  Write-Host "Máquina: $($m.Name)"
-  Get-ChildItem inputs_refactor\*.in | ForEach-Object {
-    Write-Host "  Testando $($_.Name)"
-    ruby src_refactor/main.rb $m.FullName $_.FullName
-  }
-  Write-Host "----"
-}
-
-
-```
-
-## Boas práticas
-
--Evitar stay em ciclos perigosos: transições do tipo estado,simbolo,*,mesmo_estado,cc frequentemente causam loops; prefira mover o cabeçote ou alterar símbolo/estado.
-
-- Padronizar branco: escolha ba e documente essa convenção.
-
-- Desativar DEBUG antes do commit (DEBUG = false).
-
-- Organizar inputs: crie subpastas por máquina e por tipo (valid, invalid) para facilitar testes automatizados.
-
-- Adicionar validação estática: um script que detecte transições potencialmente perigosas ajuda a evitar regressões.
-
-- Testes automatizados: crie um runner que compare saída real com saída esperada (ACEITA/REJEITA) e retorne código de erro para CI.
-
-- Mensagens de commit claras: ex.: fix: corrige cf_an_bn e loader; adiciona testes básicos.
-
-## Sugestões de arquivos adicionais
-
-- .gitignore para ignorar arquivos temporários e logs.
-
-- scripts/run_all_tests.sh ou scripts/run_all_tests.ps1 para executar a suíte de testes.
-
-- tests/expected_results.csv para mapear entradas a resultados esperados.
-
-## Exemplo de .gitignore sugerido
-
-```Código
-
-*.log
-*.tmp
-.DS_Store
-/.vscode/
-/.idea/
-/tmp/
-/node_modules/
-*.swp
-
-```
-
-## Exemplo de runner que gera CSV (bash)
-
-```Bash
-
-#!/usr/bin/env bash
-OUT="tests/results.csv"
-mkdir -p tests
-echo "machine,input,result" > "$OUT"
-for m in machines_refactor/*.mt; do
-  for i in inputs_refactor/*.in; do
-    res=$(ruby src_refactor/main.rb "$m" "$i" 2>/dev/null | grep -Eo "Decidiu\\? (ACEITA|REJEITA)" | awk '{print $2}')
-    echo "$(basename "$m"),$(basename "$i"),${res:-ERRO}" >> "$OUT"
-  done
-done
-echo "Relatório gerado em $OUT"
-
-```
-
-## Contato e versionamento
-
-Mantenha o repositório versionado e com commits frequentes. Use mensagens claras, por exemplo:
-
-```Código
-
-fix: corrige cf_an_bn e loader; adiciona testes básicos
-test: adiciona casos válidos e inválidos para anbncn
-
-```
 
